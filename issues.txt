@@ -10,3 +10,11 @@ handleEnter @ numero.js:109
 
 * [FIXED]
 If solution is 9876, input 9999 will show three yellows and one green
+* [FIXED]
+Key input was blocked after fourth digit on a guess
+
+====================
+Improvements
+* Add a "restart" button
+
+* PWA
