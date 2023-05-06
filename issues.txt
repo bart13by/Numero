@@ -1,10 +1,12 @@
 issues.txt
 
-* error after inputing 4 rows -- feels like it must be mixup between rows/cols?
+* [FIXED]
+error after inputing 4 rows -- feels like it must be mixup between rows/cols?
 Uncaught TypeError: Cannot read properties of undefined (reading '0')
     at redraw (numero.js:80:25)
     at HTMLButtonElement.handleEnter (numero.js:109:2)
 redraw @ numero.js:80
 handleEnter @ numero.js:109
 
-* If solution is 9876, input 9999 will show three yellows and one green
+* [FIXED]
+If solution is 9876, input 9999 will show three yellows and one green

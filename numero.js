@@ -7,8 +7,9 @@ let GUESSES = [];
 let IN_PROGRESS = [];
 let SOLUTION;
 
-function Guess(digit, correct, in_answer){
+function Guess(index, digit, correct=false, in_answer=false){
 	return {
+		'index': index,
 		'digit': digit,
 		'correct': correct,
 		'in_answer': in_answer
@@ -16,7 +17,6 @@ function Guess(digit, correct, in_answer){
 
 }
 function main(){
-	console.log("START");
 	let s = [];
 	for (let i = 0; i < 4; i++){
 		const randomInt = Math.floor(Math.random() * 9) + 1;
@@ -32,11 +32,10 @@ function main(){
 	document.getElementById('enter').addEventListener('click', handleEnter);
 
 	//load up data structure
-	for (let i = 0; i < 4; i++){
+	for (let i = 0; i < GUESSES_ALLOWED; i++){
 		let ltr_row = [];
-		for (let n = 0; n < 6; n++){
+		for (let n = 0; n < NUM_DIGITS; n++){
 			const node = document.getElementsByName(`guess_${i}`)[n];
-			console.log(node);
 			ltr_row.push(node);
 		}
 		LETTER_NODES.push(ltr_row);
@@ -46,8 +45,6 @@ function main(){
 function handleNumberClick(event){
 	const num = event.target.innerHTML;
 	if (BLOCK_INPUT) return;
-	console.log(`LTR_INT is ${IN_PROGRESS.length}; value is ${num}`);
-
 	if (IN_PROGRESS.length >= NUM_DIGITS){
 		BLOCK_INPUT = true;
 		return;
@@ -65,7 +62,6 @@ function redraw(){
 			const element = LETTER_NODES[row_num][node_num];
 			element.innerHTML = guess_node.digit; // format 
 			if (guess_node.correct){
-				console.log(guess_node);
 				element.style.backgroundColor = "green";	
 			}else if (guess_node.in_answer) {
 				element.style.backgroundColor = "yellow";
@@ -76,7 +72,6 @@ function redraw(){
 		}
 	}
 	for (let i = 0; i < NUM_DIGITS; i++){
-		console.log(`DEBUG: ${i} ${NUM_DIGITS}`);
 		LETTER_NODES[next_row][i].innerHTML = '';
 	}
 	for (const node_num in IN_PROGRESS){
@@ -88,23 +83,37 @@ function handleEnter(){
 	if (IN_PROGRESS.length < 4){
 		return;
 	}
-	let row = [];
-	for (const position in IN_PROGRESS){
-		// check correct (later)
-		const digit = IN_PROGRESS[position];
-		const in_answer = SOLUTION.indexOf(digit) > -1;
-		const correct = SOLUTION.charAt(position) == digit;
-		const guess = Guess(digit, correct, in_answer);
-		
-		row.push(guess);
+	// First I'm going to make an array of Guess objects
+	let guesses = [];
+	for (const position in IN_PROGRESS){	
+		guesses.push(Guess(position, IN_PROGRESS[position]));
 	}
-	GUESSES.push(row);
-	if (row.every(item => item.correct === true)){
+
+
+	for (let i = 0; i < SOLUTION.length; i++){
+		const guess = guesses[i];
+		const s_digit = SOLUTION.charAt(i);
+		if (guess.digit == s_digit){
+			guess.correct = true;
+			continue;
+		}
+		inner:
+		for (let n = 0; n < SOLUTION.length; n++){
+			if (guesses[n].in_answer || guesses[n].correct) continue;
+			if (guesses[n].digit == s_digit){
+				guesses[n].in_answer = true;
+				break inner;
+			} 
+		}
+	}
+	GUESSES.push(guesses);
+	if (guesses.every(item => item.correct === true)){
 		solved(true);
 		BLOCK_INPUT = true;
 	}else if (GUESSES.length === GUESSES_ALLOWED) {
 		solved(false);
 	}
+
 	IN_PROGRESS = [];
 	redraw();
 	BLOCK_INPUT = false;
