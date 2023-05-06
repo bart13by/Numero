@@ -17,6 +17,7 @@ function Guess(index, digit, correct=false, in_answer=false){
 
 }
 function main(){
+
 	let s = [];
 	for (let i = 0; i < 4; i++){
 		const randomInt = Math.floor(Math.random() * 9) + 1;
@@ -30,6 +31,7 @@ function main(){
 	}
 	document.getElementById('del').addEventListener('click', handleDelete);
 	document.getElementById('enter').addEventListener('click', handleEnter);
+	document.addEventListener('keydown', handleKeyPress);
 
 	//load up data structure
 	for (let i = 0; i < GUESSES_ALLOWED; i++){
@@ -42,6 +44,25 @@ function main(){
 	}
 }
 
+function handleKeyPress(event){
+	if (BLOCK_INPUT) return;
+	if (event.key === 'Enter') {
+		handleEnter();
+		return;
+	}
+	if (event.key === 'Backspace'){
+		handleDelete();
+		return;
+	}
+	if (!'123456789'.includes(event.key)) return;
+	const num = event.key;
+	if (IN_PROGRESS.length >= NUM_DIGITS){
+		BLOCK_INPUT = true;
+		return;
+	}
+	IN_PROGRESS.push(num);
+	redraw();
+}
 function handleNumberClick(event){
 	const num = event.target.innerHTML;
 	if (BLOCK_INPUT) return;
