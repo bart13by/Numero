@@ -17,4 +17,4 @@ Key input was blocked after fourth digit on a guess
 Improvements
 * Add a "restart" button
 
-* PWA
+* PWA -- fails if main.js is not commented out of index
