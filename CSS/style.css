@@ -8,21 +8,11 @@ body {
 	
 	background-color: #f0f0f0;
 }
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 500px) {
   /* CSS rules to apply only to small screens */
-/*  
-  #grid {
-	margin-top: 1px;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-	grid-gap: 2px;
-	justify-items: center;
-	align-items: center;
-}*/
-.body {
-	height: 100vh;
-	width: 100vw;
+.container {
+	height: 99vh;
+	width: 99vw;
 	box-shadow: none;
 }
 
@@ -47,7 +37,7 @@ body {
 	letter-spacing: 10px;
 }
 .info{
-	font-size: x-small;
+	font-size: small;
 }
 
 #letters {
