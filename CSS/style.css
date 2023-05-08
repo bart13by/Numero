@@ -8,38 +8,51 @@ body {
 	
 	background-color: #f0f0f0;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 380px) {
   /* CSS rules to apply only to small screens */
-  /*
-  .container {
-  	height: 100vh;
-  }*/
+/*  
+  #grid {
+	margin-top: 1px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	grid-gap: 2px;
+	justify-items: center;
+	align-items: center;
+}*/
+.body {
+	height: 100vh;
+	width: 100vw;
+	box-shadow: none;
+}
+
 }
 .correct { background-color: "green"; }
 .in_answer { background-color: "yellow"; }		
 .container {
 	background-color: #fff;
-	padding: 20px;
+	padding: 16px;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	text-align: center;
 }
 
-h1 {
-	margin-top: 50px;
-	font-size: 48px;
+#reset {
+	display: none;
 }
-
 #word {
 	margin-top: 30px;
 	font-size: 72px;
 	font-weight: bold;
 	letter-spacing: 10px;
 }
+.info{
+	font-size: x-small;
+}
 
 #letters {
 	
-	margin-top: 10px;
+	margin-top: 8px;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(6, 1fr);
@@ -59,6 +72,15 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.correct {
+	background-color: green;
+}
+.in-answer {
+	background-color: yellow;
+}
+.incorrect {
+	background-color: lightgray;
 }
 
 #grid {
@@ -81,6 +103,7 @@ h1 {
 	margin-top: 20px;
 	cursor: pointer;
 }
+#reset { display: none; }
 
 .number {
 	width: 40px;

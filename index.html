@@ -53,7 +53,10 @@
 		<div class="letter" name="guess_5" id="guess_5_3"></div>
 	</div>
 	
-	<div id="word"></div>
+	<div class="solution" id="reset">
+		<div id="word"></div>
+		<div class="info">Click to reset</div>
+	</div>
 	<div id="grid">
 		<div class="number">1</div>
 		<div class="number">2</div>
@@ -67,13 +70,14 @@
 	</div>	
 		<button class="button" id="enter">Enter</button>
 		<button class="button" id="del">DEL</button>
+		<button class="button" id="reset">Reset</button>
 	
 	</div>
 </div>
 <script>
 	// Load our little service worker
-	  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/sw.js');
   }
 </script>
 </body>

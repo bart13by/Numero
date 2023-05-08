@@ -1,7 +1,6 @@
 const GUESSES_ALLOWED = 6;
 const NUM_DIGITS = 4;
 let BLOCK_INPUT = false;
-
 let LETTER_NODES = [];
 let GUESSES = [];
 let IN_PROGRESS = [];
@@ -13,6 +12,23 @@ function Guess(index, digit, correct=false, in_answer=false){
 		'digit': digit,
 		'correct': correct,
 		'in_answer': in_answer
+	}
+
+}
+function handleReset(event){
+	console.log("in reset");
+	document.getElementById("grid").style.display = "grid";
+	document.getElementById('reset').style.display = 'none';
+	
+	BLOCK_INPUT = false;
+	LETTER_NODES = [];
+	GUESSES = [];
+	IN_PROGRESS = [];
+	main();
+	redraw();
+	for (const child of document.getElementById('letters').children){
+		child.classList.remove(...child.classList);
+		child.classList.add("letter");
 	}
 
 }
@@ -31,7 +47,11 @@ function main(){
 	}
 	document.getElementById('del').addEventListener('click', handleDelete);
 	document.getElementById('enter').addEventListener('click', handleEnter);
+	document.getElementById('reset').addEventListener('click', handleReset);
 	document.addEventListener('keydown', handleKeyPress);
+	
+	
+	
 
 	//load up data structure
 	for (let i = 0; i < GUESSES_ALLOWED; i++){
@@ -45,7 +65,7 @@ function main(){
 }
 
 function handleKeyPress(event){
-	if (BLOCK_INPUT) return;
+	// we need to let Enter and Backspace through before the block
 	if (event.key === 'Enter') {
 		handleEnter();
 		return;
@@ -54,6 +74,7 @@ function handleKeyPress(event){
 		handleDelete();
 		return;
 	}
+	if (BLOCK_INPUT) return;
 	if (!'123456789'.includes(event.key)) return;
 	const num = event.key;
 	if (IN_PROGRESS.length >= NUM_DIGITS){
@@ -83,11 +104,14 @@ function redraw(){
 			const element = LETTER_NODES[row_num][node_num];
 			element.innerHTML = guess_node.digit; // format 
 			if (guess_node.correct){
-				element.style.backgroundColor = "green";	
+				element.classList.add("correct");
+				//element.style.backgroundColor = "green";	
 			}else if (guess_node.in_answer) {
-				element.style.backgroundColor = "yellow";
+				element.classList.add("in-answer");
+				//element.style.backgroundColor = "yellow";
 			}else{
-				element.style.backgroundColor = "lightgray";
+				element.classList.add("incorrect");
+				//element.style.backgroundColor = "lightgray";
 			}
 			
 		}
@@ -130,7 +154,6 @@ function handleEnter(){
 	GUESSES.push(guesses);
 	if (guesses.every(item => item.correct === true)){
 		solved(true);
-		BLOCK_INPUT = true;
 	}else if (GUESSES.length === GUESSES_ALLOWED) {
 		solved(false);
 	}
@@ -140,6 +163,7 @@ function handleEnter(){
 	BLOCK_INPUT = false;
 
 	function solved(solved){
+		BLOCK_INPUT = true;
 		document.getElementById("grid").style.display = "none";
 		if (solved){
 			document.getElementById("word").style.backgroundColor = "green";
@@ -147,6 +171,8 @@ function handleEnter(){
 			document.getElementById("word").style.backgroundColor = "lightgray";
 		}
 		document.getElementById("word").innerHTML = `${SOLUTION}`;
+		document.getElementById('reset').style.display = 'block';
+	
 	}
 }
 
