@@ -1,4 +1,4 @@
-var cacheName = 'anv2shots-pwa';
+var cacheName = 'numero';
 var filesToCache = [
   '/',
   '/index.html',
