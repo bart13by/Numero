@@ -27,8 +27,10 @@ function handleReset(event){
 	main();
 	redraw();
 	for (const child of document.getElementById('letters').children){
+		child.innerHTML = '';
 		child.classList.remove(...child.classList);
 		child.classList.add("letter");
+
 	}
 
 }
