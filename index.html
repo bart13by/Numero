@@ -58,6 +58,11 @@
 	
 	</div>
 </div>
-<!-- <script src="JS/main.js"></script> -->
+<script>
+	// Load our little service worker
+	  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
 </body>
 </html>
