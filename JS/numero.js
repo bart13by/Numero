@@ -38,7 +38,7 @@ function main(){
 
 	let s = [];
 	for (let i = 0; i < 4; i++){
-		const randomInt = Math.floor(Math.random() * 9) + 1;
+		const randomInt = Math.floor(Math.random() * 10);
 		s.push(randomInt);
 	}
 	SOLUTION = s.join('');
