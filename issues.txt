@@ -13,8 +13,13 @@ If solution is 9876, input 9999 will show three yellows and one green
 * [FIXED]
 Key input was blocked after fourth digit on a guess
 
+* [FIXED] PWA -- fails if main.js is not commented out of index
+
+* input seems to freeze (on installed pwa) if tap too fast. Needs further testing.
+(cannot reproduce)
+
 ====================
 Improvements
-* Add a "restart" button
+* [DONE] Add a "restart" button
 
-* PWA -- fails if main.js is not commented out of index
+

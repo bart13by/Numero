@@ -77,7 +77,7 @@ function handleKeyPress(event){
 		return;
 	}
 	if (BLOCK_INPUT) return;
-	if (!'123456789'.includes(event.key)) return;
+	if (!'0123456789'.includes(event.key)) return;
 	const num = event.key;
 	if (IN_PROGRESS.length >= NUM_DIGITS){
 		BLOCK_INPUT = true;
