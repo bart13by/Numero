@@ -110,4 +110,6 @@ body {
 	font-weight: bold;
 	border-radius: 50%;
 	cursor: pointer;
+	user-select: none;
+	pointer-events: auto;
 }

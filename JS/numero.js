@@ -77,22 +77,18 @@ function handleKeyPress(event){
 		return;
 	}
 	if (BLOCK_INPUT) return;
+	if (IN_PROGRESS.length >= NUM_DIGITS) return;
 	if (!'0123456789'.includes(event.key)) return;
 	const num = event.key;
-	if (IN_PROGRESS.length >= NUM_DIGITS){
-		BLOCK_INPUT = true;
-		return;
-	}
+	
 	IN_PROGRESS.push(num);
 	redraw();
 }
 function handleNumberClick(event){
 	const num = event.target.innerHTML;
 	if (BLOCK_INPUT) return;
-	if (IN_PROGRESS.length >= NUM_DIGITS){
-		BLOCK_INPUT = true;
-		return;
-	}
+	if (IN_PROGRESS.length >= NUM_DIGITS) return;
+	
 	IN_PROGRESS.push(num);
 	redraw();
 }
