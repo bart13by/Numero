@@ -94,7 +94,10 @@ body {
 	margin-top: 20px;
 	cursor: pointer;
 }
-#reset { display: none; }
+#reset { 
+	display: none; 
+	cursor: pointer;
+}
 
 .number {
 	width: 40px;
